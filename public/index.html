@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Chatbot with Grok</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 RAG Chatbot</h1>
+            <p>Powered by Grok API & MongoDB</p>
+        </header>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="sidebar-section">
+                    <h3>📚 Documents</h3>
+                    <button id="addDocBtn" class="btn btn-primary">+ Add Document</button>
+                    <div id="documentsList" class="documents-list"></div>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <div id="chatMessages" class="chat-messages"></div>
+                <div class="chat-input-container">
+                    <input 
+                        type="text" 
+                        id="messageInput" 
+                        placeholder="Type your message here..." 
+                        autocomplete="off"
+                    >
+                    <button id="sendBtn" class="btn btn-send">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Modal -->
+        <div id="docModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Add Document</h2>
+                <form id="docForm">
+                    <label for="docTitle">Title:</label>
+                    <input type="text" id="docTitle" placeholder="Document title" required>
+                    
+                    <label for="docText">Content:</label>
+                    <textarea id="docText" rows="10" placeholder="Enter document content..." required></textarea>
+                    
+                    <button type="submit" class="btn btn-primary">Save Document</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
