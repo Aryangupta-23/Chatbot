@@ -38,7 +38,7 @@ MONGODB_URI=mongodb://localhost:27017
 DB_NAME=chatbot_db
 # OPENAI_API_KEY=your_openai_api_key_here  # Optional - for better embeddings
 GROK_API_KEY=your_grok_api_key_here
-GROK_API_URL=https://api.x.ai/v1/chat/completions
+GROK_API_URL=https://api.groq.com/openai/v1/chat/completions
 PORT=3000
 ```
 
@@ -94,7 +94,7 @@ http://localhost:3000
 ## Configuration Notes
 
 - **OpenAI API**: Optional - provides better embeddings for RAG. If not provided, a text-based fallback method is used. Get a key from [OpenAI](https://platform.openai.com/)
-- **Grok API**: Required for chat responses. Get your key from [xAI](https://x.ai/)
+- **Grok API**: Required for chat responses. Get your key from [groq]https://console.groq.com/keys))
 - **MongoDB**: Can be local or cloud (MongoDB Atlas). Update `MONGODB_URI` accordingly.
 
 ## Troubleshooting
