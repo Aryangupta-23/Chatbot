@@ -165,7 +165,7 @@ async function callGrokAPI(messages) {
     const response = await axios.post(
       GROK_API_URL,
       {
-        model: 'meta-llama/llama-guard-4-12b',
+        model: 'llama-3.1-8b-instant',
         messages: messages,
         temperature: 0.7,
         max_tokens: 1000
