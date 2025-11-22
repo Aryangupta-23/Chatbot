@@ -70,8 +70,11 @@ header p {
     margin-bottom: 10px;
     border-radius: 8px;
     border: 1px solid #e0e0e0;
-    cursor: pointer;
     transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .document-item:hover {
@@ -91,6 +94,27 @@ header p {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.btn-delete {
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.btn-delete:hover {
+    background: #cc0000;
+    transform: scale(1.1);
+}
+
+.btn-delete:active {
+    transform: scale(0.95);
 }
 
 .chat-container {

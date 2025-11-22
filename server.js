@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const axios = require('axios');
 const OpenAI = require('openai');
 require('dotenv').config();
@@ -293,7 +293,13 @@ app.get('/api/documents', async (req, res) => {
       .sort({ createdAt: -1 })
       .toArray();
     
-    res.json(documents);
+    // Convert ObjectId to string for JSON response
+    const documentsWithStringId = documents.map(doc => ({
+      ...doc,
+      _id: doc._id.toString()
+    }));
+    
+    res.json(documentsWithStringId);
   } catch (error) {
     console.error('Error fetching documents:', error);
     res.status(500).json({ error: 'Failed to fetch documents' });
@@ -304,7 +310,15 @@ app.get('/api/documents', async (req, res) => {
 app.delete('/api/documents/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    await db.collection('documents').deleteOne({ _id: id });
+    
+    // Convert string id to ObjectId
+    const objectId = new ObjectId(id);
+    const result = await db.collection('documents').deleteOne({ _id: objectId });
+    
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ error: 'Document not found' });
+    }
+    
     res.json({ message: 'Document deleted successfully' });
   } catch (error) {
     console.error('Error deleting document:', error);

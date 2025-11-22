@@ -137,13 +137,46 @@ async function loadDocuments() {
             const docDiv = document.createElement('div');
             docDiv.className = 'document-item';
             docDiv.innerHTML = `
-                <h4>${doc.title}</h4>
-                <p>${new Date(doc.createdAt).toLocaleDateString()}</p>
+                <div style="flex: 1;">
+                    <h4>${doc.title}</h4>
+                    <p>${new Date(doc.createdAt).toLocaleDateString()}</p>
+                </div>
+                <button class="btn-delete" onclick="deleteDocument('${doc._id}', '${doc.title.replace(/'/g, "\\'")}')" title="Delete document">
+                    🗑️
+                </button>
             `;
             documentsList.appendChild(docDiv);
         });
     } catch (error) {
         console.error('Error loading documents:', error);
+    }
+}
+
+// Delete document
+async function deleteDocument(id, title) {
+    if (!confirm(`Are you sure you want to delete "${title}"?`)) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/documents/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            loadDocuments();
+            addMessage('assistant', `Document "${title}" has been deleted successfully.`);
+        } else {
+            alert('Error: ' + data.error);
+        }
+    } catch (error) {
+        console.error('Error deleting document:', error);
+        alert('Failed to delete document');
     }
 }
 
